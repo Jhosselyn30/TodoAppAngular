@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,12 +10,12 @@ import { CommonModule } from '@angular/common';
 })
 export class LabsComponent {
   welcome= 'Holaaaaa';
-  tasks = [
+  tasks = signal([
     'Instalar Angular CLI',
     'Crear proyecto',
     'Crear componentes'
-  ];
-  name = 'Joss';
+  ]);
+  name = signal('Joss');
   edad = 22;
   disable =true
   img='https://w3schools.com/howto/img_avatar.png';
@@ -24,5 +24,20 @@ export class LabsComponent {
     name: 'Jhimy',
     age: 24,
     avatar: 'https://w3schools.com/howto/img_avatar.png'
+  }
+  //funciones (método)
+  clickMe(){
+    alert('Hola')
+  }
+
+  changeHandler(event: Event){
+    const input =event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.name.set(newValue);
+  }
+
+  keydownHandler(event: KeyboardEvent){
+    const input = event.target as HTMLInputElement;
+    console.log(input.value);
   }
 }

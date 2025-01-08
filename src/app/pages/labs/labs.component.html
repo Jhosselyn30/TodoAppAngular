@@ -1,21 +1,55 @@
-<h1>Hola este es mi primer proyecto</h1>
-<h2>{{welcome}}</h2>
-<ul>
-  <li *ngFor="let task of tasks">
-    {{task}}
-  </li>
-</ul>
-<hr/>
-<h2>{{'Hola'.repeat(4)}}</h2>
-<p>la suma de 3 + 3 es {{3 + 3 }}</p>
-<p>Hola soy {{name}} y mi edad es {{edad}}</p>
-<hr/>
+<div class="container">
+  <h1>Hola este es mi primer proyecto</h1>
+  <h2>{{welcome}}</h2>
+  <ul>
+    <li *ngFor="let task of tasks()">
+      {{task}}
+    </li>
+  </ul>
+  <hr/>
+  <h2>{{'Hola'.repeat(4)}}</h2>
+  <p>la suma de 3 + 3 es {{3 + 3 }}</p>
+  <p>Hola soy {{name()}} y mi edad es {{edad}}</p>
+  <hr/>
 
-<img [src]="img" alt="">
-<input type="text" [value]="name">
-<button [disabled]="disable">Click me</button>
-<hr/>
+  <img [src]="img" alt="">
+  <input type="text" [value]="name()">
+  <button [disabled]="disable">Click me</button>
+  <hr/>
 
-<p>person: {{person.name}}</p>
-<img [src]="person.avatar" alt="">
-<input type="number" [value]="person.age">
+  <p>person: {{person.name}}</p>
+  <img [src]="person.avatar" alt="">
+  <input type="number" [value]="person.age">
+
+  <hr/>
+  <button (click)="clickMe()">click me</button>
+  <button (dblclick)="clickMe()">double me</button>
+  <hr/>
+  <hr/>
+  <p>(change)</p>
+  <input type="number" [value]="person.age" (change)="changeHandler($event)">
+  <input type="text" [value]="person.name" (change)="changeHandler($event)">
+
+  <p>(keydown)</p>
+  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)">
+  <hr/>
+  <p>(keydown shift)</p>
+  <input type="text" [value]="person.name" (keydown.shift.t)="clickMe()">
+
+  <hr/>
+  <hr/>
+  <p>(SIGNALS)</p>
+  <input type="text" [value]="name()" (change)="changeHandler($event)">
+  <p>name: {{name()}}</p>
+
+  <hr/>
+  <hr/>
+
+  <ul>
+    <p>total: {{tasks().length}}</p>
+    <li *ngFor="let task of tasks(); index as i">
+      {{i}} {{task}}
+    </li>
+  </ul>
+
+</div>
