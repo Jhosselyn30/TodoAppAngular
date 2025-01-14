@@ -17,9 +17,9 @@
   <button [disabled]="disable">Click me</button>
   <hr/>
 
-  <p>person: {{person.name}}</p>
-  <img [src]="person.avatar" alt="">
-  <input type="number" [value]="person.age">
+  <p>person: {{person().name}}</p>
+  <img [src]="person().avatar" alt="">
+  <input type="number" [value]="person().age">
 
   <hr/>
   <button (click)="clickMe()">click me</button>
@@ -27,14 +27,14 @@
   <hr/>
   <hr/>
   <p>(change)</p>
-  <input type="number" [value]="person.age" (change)="changeHandler($event)">
-  <input type="text" [value]="person.name" (change)="changeHandler($event)">
+  <input type="number" [value]="person().age" (change)="changeAge($event)">
+  <input type="text" [value]="person().name" (change)="changeName($event)">
 
   <p>(keydown)</p>
-  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)">
+  <input type="text" [value]="person().name" (keydown)="keydownHandler($event)">
   <hr/>
   <p>(keydown shift)</p>
-  <input type="text" [value]="person.name" (keydown.shift.t)="clickMe()">
+  <input type="text" [value]="person().name" (keydown.shift.t)="clickMe()">
 
   <hr/>
   <hr/>
@@ -52,4 +52,58 @@
     </li>
   </ul>
 
+  <hr/>
+  <hr/>
+
+  <div *ngIf="1 !== 1 ">
+    My contend
+  </div>
+
+  <hr/>
+
+  <div *ngIf="name() === 'Joss2'">
+    Hola soy {{name()}}
+  </div>
+
+  <hr/>
+
+  <div *ngIf="person().name === 'Jhimy' && person().age > 18; else elseBlock">
+    Hola Jhimy y soy mayor de 18 años
+  </div>
+  <ng-template #elseBlock>
+    Soy Jhimy  y soy menor de 18
+  </ng-template>
+
+
+  <hr/>
+
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'Jhimy'"> Yo soy jhimy</p>
+    <p *ngSwitchCase="'Joss'"> Yo soy joss</p>
+    <p *ngSwitchCase="'Bonnie'"> Yo soy bonnie</p>
+    <p *ngSwitchDefault> yo no soy nadie</p>
+  </div>
+
+  <hr/>
+  <input type="color" [formControl]="ColorCtrl">
+  <p>color: {{ColorCtrl.value}}</p>
+
+  <svg>
+    <g>
+      <rect x="0" y="0" height="100" width="100" [attr.fill]="ColorCtrl.value"/>
+    </g>
+  </svg>
+
+  <hr/>
+  <input type="number" [formControl]="widthCtrl">
+  <span class="box" [style.width.px]="widthCtrl.value"></span>
+
+  <hr/>
+  <p>
+    <input type="text" [formControl]="nameCtrl"> <br />
+    <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre inválido</span>
+  </p>
+  <p>
+    <input type="text">
+  </p>
 </div>
